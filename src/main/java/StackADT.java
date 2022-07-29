@@ -9,22 +9,22 @@ public class StackADT {
         this.size = 0;
     }
 
-    public void push(int val) {
+    public void push(String val) {
         StackNode newNode = new StackNode(val);
         newNode.setNext(this.top);
         this.top = newNode;
         this.size++;
     }
 
-    public int pop() {
+    public String pop() {
         Objects.requireNonNull(this.top, "Stack is empty");
-        int val = this.top.getVal();
+        String val = this.top.getVal();
         this.top = this.top.getNext();
         this.size--;
         return val;
     }
 
-    public int stackTop() {
+    public String stackTop() {
         Objects.requireNonNull(this.top, "Stack is empty");
         return this.top.getVal();
     }
@@ -40,10 +40,37 @@ public class StackADT {
     public void print() {
         StackNode curr = this.top;
         while (curr != null) {
-            System.out.printf("%d ", curr.getVal());
+            System.out.printf("%s ", curr.getVal());
             curr = curr.getNext();
         }
         System.out.println();
+    }
+
+    public String toString() {
+        StackNode curr = this.top;
+        StringBuilder sb = new StringBuilder();
+        while (curr != null) {
+            sb.append(curr.getVal());
+            sb.append(" ");
+            curr = curr.getNext();
+        }
+        return sb.toString();
+    }
+
+    public static void main(String[] args) {
+        StackADT stack = new StackADT();
+        stack.push("a");
+        stack.push("b");
+        stack.push("c");
+        stack.push("d");
+        stack.push("e");
+        stack.print();
+        System.out.println("First pop: " + stack.pop());
+        System.out.println("Second pop: " + stack.pop());
+        System.out.println("Third pop: " + stack.pop());
+        System.out.println("Fourth pop: " + stack.pop());
+        System.out.println("Fifth pop: " + stack.pop());
+        System.out.println("Stack is empty: " + stack.isEmpty());
     }
 }
 

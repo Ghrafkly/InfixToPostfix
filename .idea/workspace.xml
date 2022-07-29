@@ -5,18 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="edc932c4-fd13-4328-9187-7f3ab128058b" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/Algo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/QueueADT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/StackADT.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/StackNode.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/QueueADTTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/StackADTTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/StackNodeTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Algo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InfixToPostfix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/QueueADT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueueADT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StackADT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StackADT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StackNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StackNode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/QueueADTTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/QueueADTTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/StackADTTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/StackADTTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/StackNodeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/StackNodeTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -49,6 +47,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
@@ -64,7 +63,14 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in InfixToPostfix">
+  <component name="RunManager" selected="Application.Runner">
+    <configuration name="InfixToPostfix" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="InfixToPostfix" />
+      <module name="InfixToPostfix" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="QueueADT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="QueueADT" />
       <module name="InfixToPostfix" />
@@ -72,10 +78,16 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in InfixToPostfix" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Runner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Runner" />
       <module name="InfixToPostfix" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StackADT" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="StackADT" />
+      <module name="InfixToPostfix" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -89,33 +101,13 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="QueueADTTest.test_dequeue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="InfixToPostfix" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="QueueADTTest" />
-      <option name="METHOD_NAME" value="test_dequeue" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="QueueADTTest.test_enqueue" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="InfixToPostfix" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="QueueADTTest" />
-      <option name="METHOD_NAME" value="test_enqueue" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in InfixToPostfix" />
+        <item itemvalue="Application.Runner" />
+        <item itemvalue="Application.InfixToPostfix" />
         <item itemvalue="Application.QueueADT" />
         <item itemvalue="JUnit.QueueADTTest" />
-        <item itemvalue="JUnit.QueueADTTest.test_enqueue" />
-        <item itemvalue="JUnit.QueueADTTest.test_dequeue" />
+        <item itemvalue="Application.StackADT" />
       </list>
     </recent_temporary>
   </component>
@@ -129,11 +121,23 @@
       <updated>1659010019037</updated>
       <workItem from="1659010020533" duration="610000" />
       <workItem from="1659072299058" duration="5203000" />
+      <workItem from="1659077555559" duration="14580000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

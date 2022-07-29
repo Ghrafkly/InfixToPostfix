@@ -1,47 +1,27 @@
 public class QueueADT {
-    // queue implementation using linked list using StackADT
-    private StackADT front;
-    private StackADT back;
+    private StackADT front, back;
 
     public QueueADT() {
         this.front = new StackADT();
         this.back = new StackADT();
     }
 
-    public void enqueue(int val) {
+    public void enqueue(String val) {
         this.back.push(val);
     }
 
-    public int dequeue() {
-        while (!this.back.isEmpty()) {
-            int val = this.back.pop();
-            this.front.push(val);
-        }
-
-        int val = this.front.pop();
-
-        while (!this.front.isEmpty()) {
-            int val2 = this.front.pop();
-            this.back.push(val2);
-        }
-
-        return val;
+    public String dequeue() {
+        if (this.front.isEmpty())
+            while (!this.back.isEmpty())
+                this.front.push(this.back.pop());
+        return this.front.pop();
     }
 
-    public int queueFront() {
-        while (!this.back.isEmpty()) {
-            int val = this.back.pop();
-            this.front.push(val);
-        }
-
-        int val = this.front.stackTop();
-
-        while (!this.front.isEmpty()) {
-            int val2 = this.front.pop();
-            this.back.push(val2);
-        }
-
-        return val;
+    public String queueFront() {
+        if (this.front.isEmpty())
+            while (!this.back.isEmpty())
+                this.front.push(this.back.pop());
+        return this.front.stackTop();
     }
 
     public int size() {
@@ -53,9 +33,30 @@ public class QueueADT {
     }
 
     public void print() {
-        if (this.front.isEmpty())
+        if (this.front.isEmpty()) {
             this.back.print();
-        else
+        } else {
             this.front.print();
+        }
+    }
+
+    public String toString() {
+        return this.front.isEmpty() ? this.back.toString() : this.front.toString();
+    }
+
+    public static void main(String[] args) {
+        QueueADT queue = new QueueADT();
+        queue.enqueue("a");
+        queue.enqueue("b");
+        queue.enqueue("c");
+        queue.enqueue("d");
+        queue.enqueue("e");
+        queue.print();
+        System.out.println("First dequeue: " + queue.dequeue());
+        System.out.println("Second dequeue: " + queue.dequeue());
+        System.out.println("Third dequeue: " + queue.dequeue());
+        System.out.println("Fourth dequeue: " + queue.dequeue());
+        System.out.println("Fifth dequeue: " + queue.dequeue());
+        System.out.println("Queue is empty: " + queue.isEmpty());
     }
 }

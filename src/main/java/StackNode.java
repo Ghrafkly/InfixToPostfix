@@ -1,17 +1,17 @@
 public class StackNode {
-    private int val;
+    private String val;
     private StackNode next;
 
-    public StackNode(int val) {
+    public StackNode(String val) {
         this.val = val;
         this.next = null;
     }
 
-    public int getVal() {
+    public String getVal() {
         return val;
     }
 
-    public void setVal(int val) {
+    public void setVal(String val) {
         this.val = val;
     }
 

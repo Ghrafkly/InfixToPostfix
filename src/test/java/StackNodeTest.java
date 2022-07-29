@@ -9,19 +9,19 @@ class StackNodeTest {
 
     @BeforeEach
     void setUp() {
-        stackNode = new StackNode(1);
+        stackNode = new StackNode("1");
 
     }
 
     @Test
     void test_StackNode() {
-        assertEquals(1, stackNode.getVal());
+        assertEquals("1", stackNode.getVal());
         assertNull(stackNode.getNext());
     }
 
     @Test
     void test_setNext() {
-        stackNode.setNext(new StackNode(2));
-        assertEquals(2, stackNode.getNext().getVal());
+        stackNode.setNext(new StackNode("2"));
+        assertEquals("2", stackNode.getNext().getVal());
     }
 }
