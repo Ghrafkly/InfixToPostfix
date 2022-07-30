@@ -43,20 +43,4 @@ public class QueueADT {
     public String toString() {
         return this.front.isEmpty() ? this.back.toString() : this.front.toString();
     }
-
-    public static void main(String[] args) {
-        QueueADT queue = new QueueADT();
-        queue.enqueue("a");
-        queue.enqueue("b");
-        queue.enqueue("c");
-        queue.enqueue("d");
-        queue.enqueue("e");
-        queue.print();
-        System.out.println("First dequeue: " + queue.dequeue());
-        System.out.println("Second dequeue: " + queue.dequeue());
-        System.out.println("Third dequeue: " + queue.dequeue());
-        System.out.println("Fourth dequeue: " + queue.dequeue());
-        System.out.println("Fifth dequeue: " + queue.dequeue());
-        System.out.println("Queue is empty: " + queue.isEmpty());
-    }
 }

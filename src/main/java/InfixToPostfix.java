@@ -1,56 +1,44 @@
 import java.util.Arrays;
 
 public class InfixToPostfix {
-    private StackADT stack;
-    private QueueADT queue;
     public String evaluate(String infix) {
         if (infix.contains(" "))
             infix = infix.replaceAll(" ", "");
 
         String[] exp = infix.split("");
 
-        System.out.println(Arrays.toString(exp));
+        QueueADT queue = normaliseInput(exp);
 
-        this.queue = normaliseInput(exp);
-
-        System.out.println(convertToPostfix(this.queue));
-
-        return queue.toString();
+        return convertToPostfix(queue).toString().trim();
     }
 
     private QueueADT normaliseInput(String[] exp) {
         for (int i = 0; i < exp.length; i++) {
-            if (exp[i].equals("-") && exp[i + 1].matches("\\d")) {
+            if (exp[i].equals("-") && isNumeric(exp[i + 1])) {
                 if (i > 1) {
-                    if (!exp[i - 1].matches("\\d")) {
+                    if (!isNumeric(exp[i - 1]) && !exp[i - 1].equals(")")) {
                         exp[i+1] = "-" + exp[i + 1];
                         exp[i] = "";
                     }
-                } else {
-                    exp[i+1] = "-" + exp[i + 1];
-                    exp[i] = "";
                 }
             }
         }
 
         QueueADT infix = new QueueADT();
-        for (String s : exp) {
-            if (!s.equals("")) {
-                infix.enqueue(s);
-            }
-        }
+        Arrays.stream(exp).filter(s -> !s.equals("")).forEach(infix::enqueue);
 
         return infix;
     }
 
     private StringBuilder convertToPostfix(QueueADT exp) {
-        stack = new StackADT();
+        StackADT stack = new StackADT();
         stack.push("(");
         exp.enqueue(")");
         QueueADT postfix = new QueueADT();
+
         while (!stack.isEmpty()) {
             String val = exp.dequeue();
-            if (val.matches("-?\\d")) {
+            if (isNumeric(val)) {
                 postfix.enqueue(val);
             } else if (val.equals("(")) {
                 stack.push(val);
@@ -67,9 +55,8 @@ public class InfixToPostfix {
             }
         }
 
-        while (!stack.isEmpty()) {
+        while (!stack.isEmpty())
             postfix.enqueue(stack.pop());
-        }
 
         StringBuilder sb = new StringBuilder();
         while (!postfix.isEmpty()) {
@@ -99,6 +86,6 @@ public class InfixToPostfix {
 
     public static void main(String[] args) {
         InfixToPostfix itp = new InfixToPostfix();
-        System.out.println(itp.evaluate("-1+(2--3)--4"));
+        System.out.println(itp.evaluate("1*2-(-2-3)-3"));
     }
 }

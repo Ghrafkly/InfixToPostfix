@@ -1,5 +1,5 @@
 public class StackNode {
-    private String val;
+    private final String val;
     private StackNode next;
 
     public StackNode(String val) {
@@ -9,10 +9,6 @@ public class StackNode {
 
     public String getVal() {
         return val;
-    }
-
-    public void setVal(String val) {
-        this.val = val;
     }
 
     public StackNode getNext() {

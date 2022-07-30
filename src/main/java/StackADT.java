@@ -56,21 +56,5 @@ public class StackADT {
         }
         return sb.toString();
     }
-
-    public static void main(String[] args) {
-        StackADT stack = new StackADT();
-        stack.push("a");
-        stack.push("b");
-        stack.push("c");
-        stack.push("d");
-        stack.push("e");
-        stack.print();
-        System.out.println("First pop: " + stack.pop());
-        System.out.println("Second pop: " + stack.pop());
-        System.out.println("Third pop: " + stack.pop());
-        System.out.println("Fourth pop: " + stack.pop());
-        System.out.println("Fifth pop: " + stack.pop());
-        System.out.println("Stack is empty: " + stack.isEmpty());
-    }
 }
 
