@@ -41,6 +41,7 @@ class InfixToPostfixTest {
 
     static Stream<Arguments> infixParenthesesAndNegatives() {
         return Stream.of(
+                Arguments.of("-1--2-(-2--3)--3", "-1 -2 - -2 -3 - - -3 -"),
                 Arguments.of("(1+2)+3", "1 2 + 3 +"),
                 Arguments.of("1-(2-3)", "1 2 3 - -"),
                 Arguments.of("1*2+(3--4)-3", "1 2 * 3 -4 - + 3 -"),

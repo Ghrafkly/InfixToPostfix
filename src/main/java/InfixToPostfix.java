@@ -1,6 +1,16 @@
-import java.util.Arrays;
-
+/**
+ * Coverts an Infix expression to a Postfix expression.
+ *
+ * version 1.0
+ * @author Kyle
+ */
 public class InfixToPostfix {
+    /**
+     * Evaluates an infix expression and returns the result as a postfix expression.
+     *
+     * @param infix     The infix expression to evaluate.
+     * @return          The postfix expression.
+     */
     public String evaluate(String infix) {
         if (infix.contains(" "))
             infix = infix.replaceAll(" ", "");
@@ -12,24 +22,49 @@ public class InfixToPostfix {
         return convertToPostfix(queue).toString().trim();
     }
 
+    /**
+     * Normalises input. Keeps expression parity when putting it into a queue.
+     * i.e. [-, -, 1] -> [-, -1]
+     *
+     * @param exp       expression to normalise
+     * @return          queue with normalised expression
+     */
     private QueueADT normaliseInput(String[] exp) {
         for (int i = 0; i < exp.length; i++) {
-            if (exp[i].equals("-") && isNumeric(exp[i + 1])) {
-                if (i > 1) {
-                    if (!isNumeric(exp[i - 1]) && !exp[i - 1].equals(")")) {
-                        exp[i+1] = "-" + exp[i + 1];
-                        exp[i] = "";
-                    }
-                }
+            /*
+             Deals with negative numbers i.e. -1. Or statement deals with negatives at the start of the expression.
+             First AND ensures that the element (i) is negative and the next element is a number.
+             Second AND links the next check
+             Set of ANDs before the OR ensures that the element (i) is not at the start of the expression AND the preceding element is not a number, AND not a closing bracket.
+             After OR ensures that the element (i) is in the first position of the expression.
+
+             If checks pass, i+1 is concatted with the negative sign and the number, the position the negative used to be at is replaced with an empty string
+            */
+            if (exp[i].equals("-") && isNumeric(exp[i + 1])
+                    && (i > 1 && !isNumeric(exp[i - 1]) && !exp[i - 1].equals(")") || i == 0)) {
+                exp[i + 1] = "-" + exp[i + 1];
+                exp[i] = "";
             }
         }
 
+        /*
+         Puts expression into a queue (enqueue).
+         If element in expression is blank, it is not enqueued.
+        */
         QueueADT infix = new QueueADT();
-        Arrays.stream(exp).filter(s -> !s.equals("")).forEach(infix::enqueue);
+        for (String s : exp)
+            if (!s.equals(""))
+                infix.enqueue(s);
 
         return infix;
     }
 
+    /**
+     * Converts infix expression to postfix expression.
+     *
+     * @param exp       infix expression to convert
+     * @return          postfix expression
+     */
     private StringBuilder convertToPostfix(QueueADT exp) {
         StackADT stack = new StackADT();
         stack.push("(");
@@ -55,9 +90,11 @@ public class InfixToPostfix {
             }
         }
 
+        // Any remaining elements in the stack are added to the postfix expression.
         while (!stack.isEmpty())
             postfix.enqueue(stack.pop());
 
+        // Converts postfix expression to string.
         StringBuilder sb = new StringBuilder();
         while (!postfix.isEmpty()) {
             sb.append(postfix.dequeue());
@@ -67,10 +104,22 @@ public class InfixToPostfix {
         return sb;
     }
 
+    /**
+     * Checks if string is an operator.
+     *
+     * @param val       string to check
+     * @return          true if string is an operator, false otherwise
+     */
     private boolean isOperator(String val) {
         return val.matches("[+-/*%^]");
     }
 
+    /**
+     * Checks precedence of operator.
+     *
+     * @param str       operator to check
+     * @return          precedence of operator
+     */
     private int precedence(String str) {
         return switch (str) {
             case "+", "-" -> 1;
@@ -80,12 +129,18 @@ public class InfixToPostfix {
         };
     }
 
+    /**
+     * Checks if string is a number.
+     *
+     * @param str       string to check
+     * @return          true if string is a number, false otherwise
+     */
     public boolean isNumeric(String str) {
         return str.matches("^-?\\d+(\\.\\d+)?$");
     }
 
     public static void main(String[] args) {
         InfixToPostfix itp = new InfixToPostfix();
-        System.out.println(itp.evaluate("1*2-(-2-3)-3"));
+        System.out.println(itp.evaluate("-1--2-(-2--3)--3"));
     }
 }

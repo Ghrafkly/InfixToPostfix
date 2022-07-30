@@ -1,5 +1,11 @@
 import java.util.Objects;
 
+/**
+ * Custom Stack implementation
+ *
+ * version 1.0
+ * @author Kyle
+ */
 public class StackADT {
     private StackNode top;
     private int size;
@@ -9,6 +15,11 @@ public class StackADT {
         this.size = 0;
     }
 
+    /**
+     * Push value onto the stack
+     *
+     * @param val       value to push onto the stack
+     */
     public void push(String val) {
         StackNode newNode = new StackNode(val);
         newNode.setNext(this.top);
@@ -16,6 +27,11 @@ public class StackADT {
         this.size++;
     }
 
+    /**
+     * Remove and return value from the top of the stack
+     *
+     * @return      value from the top of the stack
+     */
     public String pop() {
         Objects.requireNonNull(this.top, "Stack is empty");
         String val = this.top.getVal();
@@ -24,19 +40,33 @@ public class StackADT {
         return val;
     }
 
+    /**
+     * Return value from the top of the stack
+     *
+     * @return      value from the top of the stack
+     */
     public String stackTop() {
         Objects.requireNonNull(this.top, "Stack is empty");
         return this.top.getVal();
     }
 
+    /**
+     * @return      size of the stack
+     */
     public int size() {
         return this.size;
     }
 
+    /**
+     * @return      true if the stack is empty
+     */
     public boolean isEmpty() {
         return this.size == 0;
     }
 
+    /**
+     * Prints the stack
+     */
     public void print() {
         StackNode curr = this.top;
         while (curr != null) {
@@ -46,6 +76,11 @@ public class StackADT {
         System.out.println();
     }
 
+    /**
+     * Converts the stack to a string
+     *
+     * @return      string representation of the stack
+     */
     public String toString() {
         StackNode curr = this.top;
         StringBuilder sb = new StringBuilder();
