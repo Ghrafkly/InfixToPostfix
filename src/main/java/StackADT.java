@@ -6,11 +6,13 @@ import java.util.Objects;
  * version 1.0
  * @author Kyle
  */
-public class StackADT {
+public class StackADT
+{
     private StackNode top;
     private int size;
 
-    public StackADT() {
+    public StackADT()
+    {
         this.top = null;
         this.size = 0;
     }
@@ -20,7 +22,8 @@ public class StackADT {
      *
      * @param val       value to push onto the stack
      */
-    public void push(String val) {
+    public void push(String val)
+    {
         StackNode newNode = new StackNode(val);
         newNode.setNext(this.top);
         this.top = newNode;
@@ -32,7 +35,8 @@ public class StackADT {
      *
      * @return      value from the top of the stack
      */
-    public String pop() {
+    public String pop()
+    {
         Objects.requireNonNull(this.top, "Stack is empty");
         String val = this.top.getVal();
         this.top = this.top.getNext();
@@ -45,7 +49,8 @@ public class StackADT {
      *
      * @return      value from the top of the stack
      */
-    public String stackTop() {
+    public String stackTop()
+    {
         Objects.requireNonNull(this.top, "Stack is empty");
         return this.top.getVal();
     }
@@ -53,23 +58,27 @@ public class StackADT {
     /**
      * @return      size of the stack
      */
-    public int size() {
+    public int size()
+    {
         return this.size;
     }
 
     /**
      * @return      true if the stack is empty
      */
-    public boolean isEmpty() {
+    public boolean isEmpty()
+    {
         return this.size == 0;
     }
 
     /**
      * Prints the stack
      */
-    public void print() {
+    public void print()
+    {
         StackNode curr = this.top;
-        while (curr != null) {
+        while (curr != null)
+        {
             System.out.printf("%s ", curr.getVal());
             curr = curr.getNext();
         }
@@ -81,10 +90,12 @@ public class StackADT {
      *
      * @return      string representation of the stack
      */
-    public String toString() {
+    public String toString()
+    {
         StackNode curr = this.top;
         StringBuilder sb = new StringBuilder();
-        while (curr != null) {
+        while (curr != null)
+        {
             sb.append(curr.getVal());
             sb.append(" ");
             curr = curr.getNext();

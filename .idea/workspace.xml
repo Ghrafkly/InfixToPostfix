@@ -7,10 +7,6 @@
     <list default="true" id="edc932c4-fd13-4328-9187-7f3ab128058b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InfixToPostfix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InfixToPostfix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/QueueADT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueueADT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StackADT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StackADT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StackNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StackNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/InfixToPostfixTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/InfixToPostfixTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -126,7 +122,7 @@
       <workItem from="1659072299058" duration="5203000" />
       <workItem from="1659077555559" duration="15284000" />
       <workItem from="1659142464420" duration="5823000" />
-      <workItem from="1659186407712" duration="3817000" />
+      <workItem from="1659186407712" duration="4981000" />
     </task>
     <servers />
   </component>

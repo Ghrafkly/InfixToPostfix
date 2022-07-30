@@ -4,14 +4,16 @@
  * version 1.0
  * @author Kyle
  */
-public class InfixToPostfix {
+public class InfixToPostfix
+{
     /**
      * Evaluates an infix expression and returns the result as a postfix expression.
      *
      * @param infix     The infix expression to evaluate.
      * @return          The postfix expression.
      */
-    public String evaluate(String infix) {
+    public String evaluate(String infix)
+    {
         if (infix.contains(" "))
             infix = infix.replaceAll(" ", "");
 
@@ -29,8 +31,10 @@ public class InfixToPostfix {
      * @param exp       expression to normalise
      * @return          queue with normalised expression
      */
-    private QueueADT normaliseInput(String[] exp) {
-        for (int i = 0; i < exp.length; i++) {
+    private QueueADT normaliseInput(String[] exp)
+    {
+        for (int i = 0; i < exp.length; i++)
+        {
             /*
              Deals with negative numbers i.e. -1. Or statement deals with negatives at the start of the expression.
              First AND ensures that the element (i) is negative and the next element is a number.
@@ -41,7 +45,8 @@ public class InfixToPostfix {
              If checks pass, i+1 is concatted with the negative sign and the number, the position the negative used to be at is replaced with an empty string
             */
             if (exp[i].equals("-") && isNumeric(exp[i + 1])
-                    && (i > 1 && !isNumeric(exp[i - 1]) && !exp[i - 1].equals(")") || i == 0)) {
+                    && (i > 1 && !isNumeric(exp[i - 1]) && !exp[i - 1].equals(")") || i == 0))
+            {
                 exp[i + 1] = "-" + exp[i + 1];
                 exp[i] = "";
             }
@@ -65,25 +70,36 @@ public class InfixToPostfix {
      * @param exp       infix expression to convert
      * @return          postfix expression
      */
-    private StringBuilder convertToPostfix(QueueADT exp) {
+    private StringBuilder convertToPostfix(QueueADT exp)
+    {
         StackADT stack = new StackADT();
         stack.push("(");
         exp.enqueue(")");
         QueueADT postfix = new QueueADT();
 
-        while (!stack.isEmpty()) {
+        while (!stack.isEmpty())
+        {
             String val = exp.dequeue();
-            if (isNumeric(val)) {
+            if (isNumeric(val))
+            {
                 postfix.enqueue(val);
-            } else if (val.equals("(")) {
+            }
+            else if (val.equals("("))
+            {
                 stack.push(val);
-            } else if (val.equals(")")) {
-                while (!stack.stackTop().equals("(") && !stack.isEmpty()) {
+            }
+            else if (val.equals(")"))
+            {
+                while (!stack.stackTop().equals("(") && !stack.isEmpty())
+                {
                     postfix.enqueue(stack.pop());
                 }
                 stack.pop();
-            } else if (isOperator(val)) {
-                while (!stack.isEmpty() && precedence(val) <= precedence(stack.stackTop())) {
+            }
+            else if (isOperator(val))
+            {
+                while (!stack.isEmpty() && precedence(val) <= precedence(stack.stackTop()))
+                {
                     postfix.enqueue(stack.pop());
                 }
                 stack.push(val);
@@ -96,7 +112,8 @@ public class InfixToPostfix {
 
         // Converts postfix expression to string.
         StringBuilder sb = new StringBuilder();
-        while (!postfix.isEmpty()) {
+        while (!postfix.isEmpty())
+        {
             sb.append(postfix.dequeue());
             sb.append(" ");
         }
@@ -110,7 +127,8 @@ public class InfixToPostfix {
      * @param val       string to check
      * @return          true if string is an operator, false otherwise
      */
-    private boolean isOperator(String val) {
+    private boolean isOperator(String val)
+    {
         return val.matches("[+-/*%^]");
     }
 
@@ -120,8 +138,10 @@ public class InfixToPostfix {
      * @param str       operator to check
      * @return          precedence of operator
      */
-    private int precedence(String str) {
-        return switch (str) {
+    private int precedence(String str)
+    {
+        return switch (str)
+        {
             case "+", "-" -> 1;
             case "*", "/", "%" -> 2;
             case "^" -> 3;
@@ -135,12 +155,8 @@ public class InfixToPostfix {
      * @param str       string to check
      * @return          true if string is a number, false otherwise
      */
-    public boolean isNumeric(String str) {
+    public boolean isNumeric(String str)
+    {
         return str.matches("^-?\\d+(\\.\\d+)?$");
-    }
-
-    public static void main(String[] args) {
-        InfixToPostfix itp = new InfixToPostfix();
-        System.out.println(itp.evaluate("-1--2-(-2--3)--3"));
     }
 }
