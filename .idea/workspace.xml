@@ -7,6 +7,9 @@
     <list default="true" id="edc932c4-fd13-4328-9187-7f3ab128058b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InfixToPostfix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InfixToPostfix.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/QueueADT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueueADT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StackADT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StackADT.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/StackNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StackNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,7 +47,7 @@
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Kyle/OneDrive/Documents/Personal/Code stuff/FDM/calculator&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.editor&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode.Java&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -58,6 +61,13 @@
   <component name="RunManager" selected="JUnit.All in InfixToPostfix">
     <configuration name="InfixToPostfix" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="InfixToPostfix" />
+      <module name="InfixToPostfix" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Runner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Runner" />
       <module name="InfixToPostfix" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -80,16 +90,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="InfixToPostfixTest.testInfixToPostfix_Basic" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="InfixToPostfix" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="InfixToPostfixTest" />
-      <option name="METHOD_NAME" value="testInfixToPostfix_Basic" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="InfixToPostfixTest.testInfixToPostfix_Parentheses" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="InfixToPostfix" />
       <option name="PACKAGE_NAME" value="" />
@@ -103,10 +103,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.All in InfixToPostfix" />
+        <item itemvalue="Application.Runner" />
         <item itemvalue="Application.InfixToPostfix" />
         <item itemvalue="JUnit.InfixToPostfixTest" />
         <item itemvalue="JUnit.InfixToPostfixTest.testInfixToPostfix_Parentheses" />
-        <item itemvalue="JUnit.InfixToPostfixTest.testInfixToPostfix_Basic" />
       </list>
     </recent_temporary>
   </component>
@@ -122,7 +122,9 @@
       <workItem from="1659072299058" duration="5203000" />
       <workItem from="1659077555559" duration="15284000" />
       <workItem from="1659142464420" duration="5823000" />
-      <workItem from="1659186407712" duration="4981000" />
+      <workItem from="1659186407712" duration="5555000" />
+      <workItem from="1659193930820" duration="14000" />
+      <workItem from="1659233121563" duration="5619000" />
     </task>
     <servers />
   </component>
@@ -149,5 +151,9 @@
         </breakpoint>
       </breakpoints>
     </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

@@ -4,12 +4,10 @@
  * version 1.0
  * @author Kyle
  */
-public class QueueADT
-{
+public class QueueADT {
     private final StackADT front, back;
 
-    public QueueADT()
-    {
+    public QueueADT() {
         this.front = new StackADT();
         this.back = new StackADT();
     }
@@ -17,20 +15,18 @@ public class QueueADT
     /**
      * Adds value to the back of the queue.
      *
-     * @param val       value to add to the queue
+     * @param val value to add to the queue
      */
-    public void enqueue(String val)
-    {
+    public void enqueue(String val) {
         this.back.push(val);
     }
 
     /**
      * Removes and returns value from the front of the queue.
      *
-     * @return      value from the front of the queue
+     * @return value from the front of the queue
      */
-    public String dequeue()
-    {
+    public String dequeue() {
         if (this.front.isEmpty())
             while (!this.back.isEmpty())
                 this.front.push(this.back.pop());
@@ -40,10 +36,9 @@ public class QueueADT
     /**
      * Returns the value at the front of the queue
      *
-     * @return      value at the front of the queue
+     * @return value at the front of the queue
      */
-    public String queueFront()
-    {
+    public String queueFront() {
         if (this.front.isEmpty())
             while (!this.back.isEmpty())
                 this.front.push(this.back.pop());
@@ -51,32 +46,26 @@ public class QueueADT
     }
 
     /**
-     * @return      size of the queue
+     * @return size of the queue
      */
-    public int size()
-    {
+    public int size() {
         return this.front.size() + this.back.size();
     }
 
     /**
-     * @return      true if the queue is empty
+     * @return true if the queue is empty
      */
-    public boolean isEmpty()
-    {
+    public boolean isEmpty() {
         return this.front.isEmpty() && this.back.isEmpty();
     }
 
     /**
      * Prints the queue
      */
-    public void print()
-    {
-        if (this.front.isEmpty())
-        {
+    public void print() {
+        if (this.front.isEmpty()) {
             this.back.print();
-        }
-        else
-        {
+        } else {
             this.front.print();
         }
     }
@@ -84,10 +73,9 @@ public class QueueADT
     /**
      * Converts the queue to a string
      *
-     * @return    string representation of the queue
+     * @return string representation of the queue
      */
-    public String toString()
-    {
+    public String toString() {
         return this.front.isEmpty() ? this.back.toString() : this.front.toString();
     }
 }

@@ -4,102 +4,108 @@
  * version 1.0
  * @author Kyle
  */
-public class InfixToPostfix
-{
+public class InfixToPostfix {
     /**
      * Evaluates an infix expression and returns the result as a postfix expression.
      *
-     * @param infix     The infix expression to evaluate.
-     * @return          The postfix expression.
+     * @param infix The infix expression to evaluate.
+     * @return The postfix expression.
      */
-    public String evaluate(String infix)
-    {
+    public String evaluate(String infix) {
+        // If spaces exist in the infix expression, remove them.
         if (infix.contains(" "))
             infix = infix.replaceAll(" ", "");
 
+        /*
+         Split the infix expression into tokens.
+         This will destroy negative numbers, decimals, and multi-digit numbers.
+        */
         String[] exp = infix.split("");
 
-        QueueADT queue = normaliseInput(exp);
+        // Create a queue to hold the tokens.
+        QueueADT queue = new QueueADT();
+        for (String s : exp) {
+            queue.enqueue(s);
+        }
+
+        // Recombines the tokens into their appropriate negative, decimal, or multi-digit number.
+        normaliseInput(queue);
 
         return convertToPostfix(queue).toString().trim();
     }
 
     /**
-     * Normalises input. Keeps expression parity when putting it into a queue.
-     * i.e. [-, -, 1] -> [-, -1]
+     * Normalises the input into a queue. Maintains parity of negative numbers, decimals and multi-digit numbers.
      *
-     * @param exp       expression to normalise
-     * @return          queue with normalised expression
+     *
+     * @param exp       The infix expression to normalise.
      */
-    private QueueADT normaliseInput(String[] exp)
-    {
-        for (int i = 0; i < exp.length; i++)
-        {
-            /*
-             Deals with negative numbers i.e. -1. Or statement deals with negatives at the start of the expression.
-             First AND ensures that the element (i) is negative and the next element is a number.
-             Second AND links the next check
-             Set of ANDs before the OR ensures that the element (i) is not at the start of the expression AND the preceding element is not a number, AND not a closing bracket.
-             After OR ensures that the element (i) is in the first position of the expression.
+    public void normaliseInput(QueueADT exp) {
+        StringBuilder hold = new StringBuilder();
+        int size = exp.size();
+        boolean negCheck = false;
 
-             If checks pass, i+1 is concatted with the negative sign and the number, the position the negative used to be at is replaced with an empty string
+        for (int i = 0; i < size; i++) {
+            String val = exp.dequeue();
+
+            /*
+             Checks is value is a number. Stores it, ensures parity of multi-digit numbers.
+             "num num" pattern
             */
-            if (exp[i].equals("-") && isNumeric(exp[i + 1])
-                    && (i > 1 && !isNumeric(exp[i - 1]) && !exp[i - 1].equals(")") || i == 0))
-            {
-                exp[i + 1] = "-" + exp[i + 1];
-                exp[i] = "";
+            if (isNumeric(val)) {
+                hold.append(val);
+                negCheck = false;
+            } else {
+
+                /*
+                 If true, store value. Ensures parity of negative and decimal numbers
+                 "- num" pattern OR ". num pattern
+                */
+                if ((val.equals("-") && (negCheck || i == 0)) || val.equals(".")) {
+                    hold.append(val);
+
+                /*
+                 Otherwise, store hold data, then value.
+                 Set negcheck based on OR, ensures negative numbers aren't created from a ") - num" pattern.
+                 Ensures parity of negative numbers from a "op - num" or "( - num" pattern
+                */
+                } else {
+                    exp.enqueue(hold.toString());
+                    exp.enqueue(val);
+                    hold.setLength(0);
+                    negCheck = isOperator(val) || val.equals("(");
+                }
             }
         }
 
-        /*
-         Puts expression into a queue (enqueue).
-         If element in expression is blank, it is not enqueued.
-        */
-        QueueADT infix = new QueueADT();
-        for (String s : exp)
-            if (!s.equals(""))
-                infix.enqueue(s);
-
-        return infix;
+        exp.enqueue(hold.toString());
     }
 
     /**
      * Converts infix expression to postfix expression.
      *
-     * @param exp       infix expression to convert
-     * @return          postfix expression
+     * @param exp infix expression to convert
+     * @return postfix expression
      */
-    private StringBuilder convertToPostfix(QueueADT exp)
-    {
+    private StringBuilder convertToPostfix(QueueADT exp) {
         StackADT stack = new StackADT();
         stack.push("(");
         exp.enqueue(")");
         QueueADT postfix = new QueueADT();
 
-        while (!stack.isEmpty())
-        {
+        while (!stack.isEmpty()) {
             String val = exp.dequeue();
-            if (isNumeric(val))
-            {
+            if (isNumeric(val)) {
                 postfix.enqueue(val);
-            }
-            else if (val.equals("("))
-            {
+            } else if (val.equals("(")) {
                 stack.push(val);
-            }
-            else if (val.equals(")"))
-            {
-                while (!stack.stackTop().equals("(") && !stack.isEmpty())
-                {
+            } else if (val.equals(")")) {
+                while (!stack.stackTop().equals("(") && !stack.isEmpty()) {
                     postfix.enqueue(stack.pop());
                 }
                 stack.pop();
-            }
-            else if (isOperator(val))
-            {
-                while (!stack.isEmpty() && precedence(val) <= precedence(stack.stackTop()))
-                {
+            } else if (isOperator(val)) {
+                while (!stack.isEmpty() && precedence(val) <= precedence(stack.stackTop())) {
                     postfix.enqueue(stack.pop());
                 }
                 stack.push(val);
@@ -112,8 +118,7 @@ public class InfixToPostfix
 
         // Converts postfix expression to string.
         StringBuilder sb = new StringBuilder();
-        while (!postfix.isEmpty())
-        {
+        while (!postfix.isEmpty()) {
             sb.append(postfix.dequeue());
             sb.append(" ");
         }
@@ -124,24 +129,21 @@ public class InfixToPostfix
     /**
      * Checks if string is an operator.
      *
-     * @param val       string to check
-     * @return          true if string is an operator, false otherwise
+     * @param val string to check
+     * @return true if string is an operator, false otherwise
      */
-    private boolean isOperator(String val)
-    {
+    private boolean isOperator(String val) {
         return val.matches("[+-/*%^]");
     }
 
     /**
      * Checks precedence of operator.
      *
-     * @param str       operator to check
-     * @return          precedence of operator
+     * @param str operator to check
+     * @return precedence of operator
      */
-    private int precedence(String str)
-    {
-        return switch (str)
-        {
+    private int precedence(String str) {
+        return switch (str) {
             case "+", "-" -> 1;
             case "*", "/", "%" -> 2;
             case "^" -> 3;
@@ -152,11 +154,16 @@ public class InfixToPostfix
     /**
      * Checks if string is a number.
      *
-     * @param str       string to check
-     * @return          true if string is a number, false otherwise
+     * @param str string to check
+     * @return true if string is a number, false otherwise
      */
-    public boolean isNumeric(String str)
-    {
+    public boolean isNumeric(String str) {
         return str.matches("^-?\\d+(\\.\\d+)?$");
+    }
+
+    public static void main(String[] args) {
+        InfixToPostfix converter = new InfixToPostfix();
+//        System.out.println(converter.evaluate("-12-34*(-2.36--3.64)--76^3/(32*(-54+36))+4-7%2"));
+        System.out.println(converter.evaluate("-1--3-(-2--4)-4"));
     }
 }
