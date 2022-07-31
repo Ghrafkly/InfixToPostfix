@@ -7,9 +7,6 @@
     <list default="true" id="edc932c4-fd13-4328-9187-7f3ab128058b" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/InfixToPostfix.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/InfixToPostfix.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/QueueADT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/QueueADT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StackADT.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StackADT.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/StackNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/StackNode.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +55,7 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in InfixToPostfix">
+  <component name="RunManager" selected="Application.InfixToPostfix">
     <configuration name="InfixToPostfix" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="InfixToPostfix" />
       <module name="InfixToPostfix" />
@@ -102,9 +99,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.InfixToPostfix" />
         <item itemvalue="JUnit.All in InfixToPostfix" />
         <item itemvalue="Application.Runner" />
-        <item itemvalue="Application.InfixToPostfix" />
         <item itemvalue="JUnit.InfixToPostfixTest" />
         <item itemvalue="JUnit.InfixToPostfixTest.testInfixToPostfix_Parentheses" />
       </list>
@@ -124,7 +121,7 @@
       <workItem from="1659142464420" duration="5823000" />
       <workItem from="1659186407712" duration="5555000" />
       <workItem from="1659193930820" duration="14000" />
-      <workItem from="1659233121563" duration="5619000" />
+      <workItem from="1659233121563" duration="6525000" />
     </task>
     <servers />
   </component>

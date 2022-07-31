@@ -47,34 +47,19 @@ public class InfixToPostfix {
 
         for (int i = 0; i < size; i++) {
             String val = exp.dequeue();
-
-            /*
-             Checks is value is a number. Stores it, ensures parity of multi-digit numbers.
-             "num num" pattern
-            */
-            if (isNumeric(val)) {
+            if (val.equals("-") && (negCheck || i == 0)) {
                 hold.append(val);
-                negCheck = false;
             } else {
-
-                /*
-                 If true, store value. Ensures parity of negative and decimal numbers
-                 "- num" pattern OR ". num pattern
-                */
-                if ((val.equals("-") && (negCheck || i == 0)) || val.equals(".")) {
+                if (hold.length() > 0 && isNumeric(val)) {
                     hold.append(val);
-
-                /*
-                 Otherwise, store hold data, then value.
-                 Set negcheck based on OR, ensures negative numbers aren't created from a ") - num" pattern.
-                 Ensures parity of negative numbers from a "op - num" or "( - num" pattern
-                */
+                    exp.enqueue(hold.toString());
                 } else {
                     exp.enqueue(hold.toString());
                     exp.enqueue(val);
-                    hold.setLength(0);
-                    negCheck = isOperator(val) || val.equals("(");
                 }
+
+                hold.setLength(0);
+                negCheck = isOperator(val) || val.equals("(");
             }
         }
 
