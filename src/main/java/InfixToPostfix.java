@@ -18,7 +18,7 @@ public class InfixToPostfix {
 
         /*
          Split the infix expression into tokens.
-         This will destroy negative numbers, decimals, and multi-digit numbers.
+         This will destroy negative numbers, they will be recreated at a later step.
         */
         String[] exp = infix.split("");
 
@@ -35,7 +35,7 @@ public class InfixToPostfix {
     }
 
     /**
-     * Normalises the input into a queue. Maintains parity of negative numbers, decimals and multi-digit numbers.
+     * Normalises the input into a queue. Maintains parity of negative numbers.
      *
      *
      * @param exp       The infix expression to normalise.
@@ -47,6 +47,8 @@ public class InfixToPostfix {
 
         for (int i = 0; i < size; i++) {
             String val = exp.dequeue();
+
+            // Maintains parity of negative numbers.
             if (val.equals("-") && (negCheck || i == 0)) {
                 hold.append(val);
             } else {
