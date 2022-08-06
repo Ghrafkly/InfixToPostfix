@@ -29,21 +29,23 @@ public class InfixToPostfix {
         }
 
         // Recombines the tokens into their appropriate negative, decimal, or multi-digit number.
-        normaliseInput(queue);
-
-        return convertToPostfix(queue).toString().trim();
+        StringBuilder sb = normaliseInput(queue);
+        if (!sb.isEmpty())
+            return sb.toString();
+        else
+            return convertToPostfix(queue).toString().trim();
     }
 
     /**
      * Normalises the input into a queue. Maintains parity of negative numbers.
      *
-     *
-     * @param exp       The infix expression to normalise.
+     * @param exp The infix expression to normalise.
      */
-    public void normaliseInput(QueueADT exp) {
+    public StringBuilder normaliseInput(QueueADT exp) {
         StringBuilder hold = new StringBuilder();
         int size = exp.size();
         boolean negCheck = false;
+        boolean opCheck = false;
 
         for (int i = 0; i < size; i++) {
             String val = exp.dequeue();
@@ -52,20 +54,26 @@ public class InfixToPostfix {
             if (val.equals("-") && (negCheck || i == 0)) {
                 hold.append(val);
             } else {
-                if (hold.length() > 0 && isNumeric(val)) {
+                if (isNumeric(val)) {
                     hold.append(val);
                     exp.enqueue(hold.toString());
-                } else {
+                    opCheck = false;
+                } else if (!opCheck) {
                     exp.enqueue(hold.toString());
                     exp.enqueue(val);
+                    if (isOperator(val))
+                        opCheck = true;
+                } else {
+                    hold = new StringBuilder("Extra Operator");
+                    return hold;
                 }
 
                 hold.setLength(0);
                 negCheck = isOperator(val) || val.equals("(");
             }
         }
-
         exp.enqueue(hold.toString());
+        return new StringBuilder();
     }
 
     /**
@@ -76,12 +84,26 @@ public class InfixToPostfix {
      */
     private StringBuilder convertToPostfix(QueueADT exp) {
         StackADT stack = new StackADT();
+        QueueADT postfix = new QueueADT();
+        StringBuilder sb = new StringBuilder();
+
+        int size = exp.size();
+
         stack.push("(");
         exp.enqueue(")");
-        QueueADT postfix = new QueueADT();
+
 
         while (!stack.isEmpty()) {
+            // Check if there is an extra bracket
+            if (exp.isEmpty())
+                return new StringBuilder("Extra Bracket");
+
             String val = exp.dequeue();
+
+            // Check if the first token is a closing bracket
+            if (val.equals(")") && (exp.size() + 1) == size)
+                return new StringBuilder("Extra Bracket");
+
             if (isNumeric(val)) {
                 postfix.enqueue(val);
             } else if (val.equals("(")) {
@@ -104,7 +126,6 @@ public class InfixToPostfix {
             postfix.enqueue(stack.pop());
 
         // Converts postfix expression to string.
-        StringBuilder sb = new StringBuilder();
         while (!postfix.isEmpty()) {
             sb.append(postfix.dequeue());
             sb.append(" ");
@@ -146,11 +167,5 @@ public class InfixToPostfix {
      */
     public boolean isNumeric(String str) {
         return str.matches("^-?\\d+(\\.\\d+)?$");
-    }
-
-    public static void main(String[] args) {
-        InfixToPostfix converter = new InfixToPostfix();
-//        System.out.println(converter.evaluate("-12-34*(-2.36--3.64)--76^3/(32*(-54+36))+4-7%2"));
-        System.out.println(converter.evaluate("-1--3-(-2--4)-4"));
     }
 }
