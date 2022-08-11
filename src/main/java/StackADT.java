@@ -5,6 +5,24 @@
  * @author Kyle
  */
 public class StackADT {
+    private static class StackNode {
+        private final String val;
+        private StackNode next;
+        public StackNode(String val) {
+            this.val = val;
+            this.next = null;
+        }
+        public String getVal() {
+            return this.val;
+        }
+        public StackNode getNext() {
+            return this.next;
+        }
+        public void setNext(StackNode next) {
+            this.next = next;
+        }
+    }
+
     private StackNode top;
     private int size;
 
@@ -31,6 +49,9 @@ public class StackADT {
      * @return value from the top of the stack
      */
     public String pop() {
+        if (this.isEmpty())
+            throw new IllegalStateException("Stack is empty");
+
         String val = this.top.getVal();
         this.top = this.top.getNext();
         this.size--;
@@ -43,7 +64,7 @@ public class StackADT {
      * @return value from the top of the stack
      */
     public String stackTop() {
-        return this.top.getVal();
+        return this.top == null ? null : this.top.getVal();
     }
 
     /**

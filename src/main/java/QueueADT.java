@@ -27,6 +27,9 @@ public class QueueADT {
      * @return value from the front of the queue
      */
     public String dequeue() {
+        if (this.isEmpty())
+            throw new IllegalStateException("Queue is empty");
+
         if (this.front.isEmpty())
             while (!this.back.isEmpty())
                 this.front.push(this.back.pop());

@@ -28,52 +28,51 @@ public class InfixToPostfix {
             queue.enqueue(s);
         }
 
-        // Recombines the tokens into their appropriate negative, decimal, or multi-digit number.
-        StringBuilder sb = normaliseInput(queue);
-        if (!sb.isEmpty())
-            return sb.toString();
-        else
+        StringBuilder error = errorCheck(exp);
+
+        if (error.toString().equals("Clear")) {
             return convertToPostfix(queue).toString().trim();
+        } else {
+            return error.toString();
+        }
     }
 
     /**
-     * Normalises the input into a queue. Maintains parity of negative numbers.
+     * Checks for errors in the expression. Bracket errors are handled in the conversion method
      *
-     * @param exp The infix expression to normalise.
+     * Patterns:
+     * Operator at the start of the expression,
+     * Operator at the end of the expression,
+     * Two integers in a row,
+     * Two operators in a row
+     *
+     * @param exp The infix expression to check.
      */
-    public StringBuilder normaliseInput(QueueADT exp) {
-        StringBuilder hold = new StringBuilder();
-        int size = exp.size();
-        boolean negCheck = false;
-        boolean opCheck = false;
+    public StringBuilder errorCheck(String[] exp) {
+        QueueADT queue = new QueueADT();
 
-        for (int i = 0; i < size; i++) {
-            String val = exp.dequeue();
+        if (isOperator(exp[0]))
+            return new StringBuilder("Operator at start of expression");
 
-            // Maintains parity of negative numbers.
-            if (val.equals("-") && (negCheck || i == 0)) {
-                hold.append(val);
-            } else {
-                if (isNumeric(val)) {
-                    hold.append(val);
-                    exp.enqueue(hold.toString());
-                    opCheck = false;
-                } else if (!opCheck) {
-                    exp.enqueue(hold.toString());
-                    exp.enqueue(val);
-                    if (isOperator(val))
-                        opCheck = true;
-                } else {
-                    hold = new StringBuilder("Extra Operator");
-                    return hold;
-                }
+        for (String s : exp)
+            queue.enqueue(s);
 
-                hold.setLength(0);
-                negCheck = isOperator(val) || val.equals("(");
-            }
+
+        while (!queue.isEmpty()) {
+            String s = queue.dequeue();
+
+            if (!isNumeric(s) && queue.isEmpty() && !s.equals(")") && !s.equals("("))
+                return new StringBuilder("Operator at end of expression");
+            else if (queue.isEmpty())
+                break;
+
+            if (isNumeric(s) && isNumeric(queue.queueFront()))
+                return new StringBuilder("Extra Integer detected");
+            else if (isOperator(s) && isOperator(queue.queueFront()))
+                return new StringBuilder("Extra Operator detected");
         }
-        exp.enqueue(hold.toString());
-        return new StringBuilder();
+
+        return new StringBuilder("Clear");
     }
 
     /**
@@ -87,22 +86,17 @@ public class InfixToPostfix {
         QueueADT postfix = new QueueADT();
         StringBuilder sb = new StringBuilder();
 
-        int size = exp.size();
-
         stack.push("(");
         exp.enqueue(")");
 
+        boolean bracketCheck = exp.queueFront().equals(")");
 
         while (!stack.isEmpty()) {
             // Check if there is an extra bracket
-            if (exp.isEmpty())
-                return new StringBuilder("Extra Bracket");
+            if (exp.isEmpty() || bracketCheck)
+                return new StringBuilder("Issues with Brackets detected");
 
             String val = exp.dequeue();
-
-            // Check if the first token is a closing bracket
-            if (val.equals(")") && (exp.size() + 1) == size)
-                return new StringBuilder("Extra Bracket");
 
             if (isNumeric(val)) {
                 postfix.enqueue(val);
@@ -166,6 +160,6 @@ public class InfixToPostfix {
      * @return true if string is a number, false otherwise
      */
     public boolean isNumeric(String str) {
-        return str.matches("^-?\\d+(\\.\\d+)?$");
+        return str.matches("^\\d$");
     }
 }
