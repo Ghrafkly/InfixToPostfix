@@ -1,16 +1,5 @@
-/**
- * Coverts an Infix expression to a Postfix expression.
- *
- * version 1.0
- * @author Kyle
- */
 public class InfixToPostfix {
-    /**
-     * Evaluates an infix expression and returns the result as a postfix expression.
-     *
-     * @param infix The infix expression to evaluate.
-     * @return The postfix expression.
-     */
+    //  Evaluates an infix expression and returns the result as a postfix expression.
     public String evaluate(String infix) {
         // If spaces exist in the infix expression, remove them.
         if (infix.contains(" "))
@@ -30,24 +19,20 @@ public class InfixToPostfix {
 
         StringBuilder error = errorCheck(exp);
 
-        if (error.toString().equals("Clear")) {
-            return convertToPostfix(queue).toString().trim();
-        } else {
-            return error.toString();
-        }
+        return error.toString().equals("Clear")
+                ? convertToPostfix(queue).toString().trim()
+                : error.toString();
     }
 
-    /**
-     * Checks for errors in the expression. Bracket errors are handled in the conversion method
-     *
-     * Patterns:
-     * Operator at the start of the expression,
-     * Operator at the end of the expression,
-     * Two integers in a row,
-     * Two operators in a row
-     *
-     * @param exp The infix expression to check.
-     */
+    /*
+     Checks for error patterns in the expression. Bracket errors are handled in the conversion method
+
+     Patterns:
+     Operator at the start of the expression,
+     Operator at the end of the expression,
+     Two integers in a row,
+     Two operators in a row
+    */
     public StringBuilder errorCheck(String[] exp) {
         QueueADT queue = new QueueADT();
 
@@ -75,12 +60,7 @@ public class InfixToPostfix {
         return new StringBuilder("Clear");
     }
 
-    /**
-     * Converts infix expression to postfix expression.
-     *
-     * @param exp infix expression to convert
-     * @return postfix expression
-     */
+    // Converts infix expression to postfix expression.
     private StringBuilder convertToPostfix(QueueADT exp) {
         StackADT stack = new StackADT();
         QueueADT postfix = new QueueADT();
@@ -128,22 +108,12 @@ public class InfixToPostfix {
         return sb;
     }
 
-    /**
-     * Checks if string is an operator.
-     *
-     * @param val string to check
-     * @return true if string is an operator, false otherwise
-     */
+    // Checks if string is an operator.
     private boolean isOperator(String val) {
         return val.matches("[+-/*%^]");
     }
 
-    /**
-     * Checks precedence of operator.
-     *
-     * @param str operator to check
-     * @return precedence of operator
-     */
+    // Checks precedence of operator.
     private int precedence(String str) {
         return switch (str) {
             case "+", "-" -> 1;
@@ -153,12 +123,7 @@ public class InfixToPostfix {
         };
     }
 
-    /**
-     * Checks if string is a number.
-     *
-     * @param str string to check
-     * @return true if string is a number, false otherwise
-     */
+    // Checks if string is a number.
     public boolean isNumeric(String str) {
         return str.matches("^\\d$");
     }

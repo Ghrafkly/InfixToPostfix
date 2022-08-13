@@ -1,9 +1,3 @@
-/**
- * Custom Queue implementation
- *
- * version 1.0
- * @author Kyle
- */
 public class QueueADT {
     private final StackADT front, back;
 
@@ -12,20 +6,12 @@ public class QueueADT {
         this.back = new StackADT();
     }
 
-    /**
-     * Adds value to the back of the queue.
-     *
-     * @param val value to add to the queue
-     */
+    // Adds value to the back of the queue.
     public void enqueue(String val) {
         this.back.push(val);
     }
 
-    /**
-     * Removes and returns value from the front of the queue.
-     *
-     * @return value from the front of the queue
-     */
+    // Removes and returns value from the front of the queue.
     public String dequeue() {
         if (this.isEmpty())
             throw new IllegalStateException("Queue is empty");
@@ -36,11 +22,7 @@ public class QueueADT {
         return this.front.pop();
     }
 
-    /**
-     * Returns the value at the front of the queue
-     *
-     * @return value at the front of the queue
-     */
+    // Returns the value at the front of the queue
     public String queueFront() {
         if (this.front.isEmpty())
             while (!this.back.isEmpty())
@@ -48,23 +30,17 @@ public class QueueADT {
         return this.front.stackTop();
     }
 
-    /**
-     * @return size of the queue
-     */
+    // Size of the queue
     public int size() {
         return this.front.size() + this.back.size();
     }
 
-    /**
-     * @return true if the queue is empty
-     */
+    // Returns true if the queue is empty
     public boolean isEmpty() {
         return this.front.isEmpty() && this.back.isEmpty();
     }
 
-    /**
-     * Prints the queue
-     */
+    // Prints the queue
     public void print() {
         if (this.front.isEmpty()) {
             this.back.print();
@@ -73,11 +49,7 @@ public class QueueADT {
         }
     }
 
-    /**
-     * Converts the queue to a string
-     *
-     * @return string representation of the queue
-     */
+    // Converts the queue to a string
     public String toString() {
         return this.front.isEmpty() ? this.back.toString() : this.front.toString();
     }
