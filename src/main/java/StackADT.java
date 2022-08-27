@@ -1,10 +1,22 @@
-/**
- * Custom Stack implementation
- *
- * version 1.0
- * @author Kyle
- */
 public class StackADT {
+    private static class StackNode {
+        private final String val;
+        private StackNode next;
+        public StackNode(String val) {
+            this.val = val;
+            this.next = null;
+        }
+        public String getVal() {
+            return this.val;
+        }
+        public StackNode getNext() {
+            return this.next;
+        }
+        public void setNext(StackNode next) {
+            this.next = next;
+        }
+    }
+
     private StackNode top;
     private int size;
 
@@ -13,11 +25,7 @@ public class StackADT {
         this.size = 0;
     }
 
-    /**
-     * Push value onto the stack
-     *
-     * @param val value to push onto the stack
-     */
+    // Push value onto the stack
     public void push(String val) {
         StackNode newNode = new StackNode(val);
         newNode.setNext(this.top);
@@ -25,44 +33,33 @@ public class StackADT {
         this.size++;
     }
 
-    /**
-     * Remove and return value from the top of the stack
-     *
-     * @return value from the top of the stack
-     */
+    // Remove and return value from the top of the stack
     public String pop() {
+        if (this.isEmpty())
+            throw new IllegalStateException("Stack is empty");
+
         String val = this.top.getVal();
         this.top = this.top.getNext();
         this.size--;
         return val;
     }
 
-    /**
-     * Return value from the top of the stack
-     *
-     * @return value from the top of the stack
-     */
+    // Return value from the top of the stack
     public String stackTop() {
-        return this.top.getVal();
+        return this.top == null ? null : this.top.getVal();
     }
 
-    /**
-     * @return size of the stack
-     */
+    // Return size of the stack
     public int size() {
         return this.size;
     }
 
-    /**
-     * @return true if the stack is empty
-     */
+    // Return true if the stack is empty
     public boolean isEmpty() {
         return this.size == 0;
     }
 
-    /**
-     * Prints the stack
-     */
+    // Print contents of the stack
     public void print() {
         StackNode curr = this.top;
         while (curr != null) {
@@ -72,11 +69,7 @@ public class StackADT {
         System.out.println();
     }
 
-    /**
-     * Converts the stack to a string
-     *
-     * @return string representation of the stack
-     */
+    // Converts the stack to a string
     public String toString() {
         StackNode curr = this.top;
         StringBuilder sb = new StringBuilder();
